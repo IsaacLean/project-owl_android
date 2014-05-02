@@ -9,12 +9,6 @@
     android:orientation="horizontal"
     tools:context="com.isaaclean.projectowl.MainActivity$PlaceholderFragment" >
 
-    <!--<TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/hello_world" />
-        <requestFocus />-->
-
     <EditText
         android:id="@+id/field_edit_msg"
         android:layout_width="0dp"
@@ -27,6 +21,6 @@
         android:id="@+id/btn_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/btn_send" />
-
+        android:text="@string/btn_send"
+        android:onClick="sendMsg" />
 </LinearLayout>

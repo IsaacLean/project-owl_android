@@ -1,17 +1,18 @@
 package com.isaaclean.projectowl;
 
-import android.support.v7.app.ActionBarActivity;
-import android.support.v7.app.ActionBar;
-import android.support.v4.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.support.v7.app.ActionBarActivity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.os.Build;
+import android.widget.EditText;
 
 public class MainActivity extends ActionBarActivity {
+	public final static String EXTRA_MSG = "com.project-owl_android.MSG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,6 +45,14 @@ public class MainActivity extends ActionBarActivity {
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+    
+    public void sendMsg(View view){
+    	Intent intent = new Intent(this, DisplayMsgActivity.class);
+    	EditText editText = (EditText) findViewById(R.id.field_edit_msg);
+    	String msg = editText.getText().toString();
+    	intent.putExtra(EXTRA_MSG, msg);
+    	startActivity(intent);
     }
 
     /**
