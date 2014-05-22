@@ -12,7 +12,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 public class MainActivity extends ActionBarActivity {
-	public final static String EXTRA_MSG = "com.project-owl_android.MSG";
+	public final static String EXTRA_MSG = "com.isaaclean.projectowl.MSG";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,9 +47,10 @@ public class MainActivity extends ActionBarActivity {
         return super.onOptionsItemSelected(item);
     }
     
+    //Called when user clicks "Send" button
     public void sendMsg(View view){
     	Intent intent = new Intent(this, DisplayMsgActivity.class);
-    	EditText editText = (EditText) findViewById(R.id.field_edit_msg);
+    	EditText editText = (EditText)findViewById(R.id.edit_msg);
     	String msg = editText.getText().toString();
     	intent.putExtra(EXTRA_MSG, msg);
     	startActivity(intent);

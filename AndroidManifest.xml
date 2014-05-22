@@ -24,11 +24,11 @@
         </activity>
         <activity
             android:name="com.isaaclean.projectowl.DisplayMsgActivity"
-            android:label="@string/title_activity_display_msg"
+            android:label="@string/title_activity_display_msg" 
             android:parentActivityName="com.isaaclean.projectowl.MainActivity" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.isaaclean.projectowl.MainActivity" />
+			<meta-data
+			    android:name="android.support.PARENT_ACTIVITY"
+			    android:value="com.isaaclean.projectowl.MainActivity" />
         </activity>
     </application>
 
