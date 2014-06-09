@@ -32,7 +32,7 @@ public class FinanceActivity extends Activity {
 	ArrayList<String> itemArrayList = new ArrayList<String>();
 	ArrayAdapter<String> itemAdapter;
 	Context context;
-	String feedUrl = "http://isaaclean.com/news_sources.json";
+	String feedUrl = "http://otispost.appspot.com/finance.json";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -114,10 +114,10 @@ public class FinanceActivity extends Activity {
 				//Start reading JSON
 				//Log.i("ProjectOwl", jsonData);
 				JSONObject json = new JSONObject(jsonData);
-				JSONArray sites = json.getJSONArray("sites");
-				for(int i=0; i < sites.length(); ++i){
-					JSONObject item = sites.getJSONObject(i);
-					itemArrayList.add(item.getString("title"));
+				JSONArray items = json.getJSONArray("items");
+				for(int i=0; i < items.length(); ++i){
+					JSONObject item = items.getJSONObject(i);
+					itemArrayList.add(item.getString("date"));
 				}		
 			}catch(ClientProtocolException e){
 				e.printStackTrace();
