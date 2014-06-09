@@ -1,15 +1,15 @@
 package com.isaaclean.projectowl;
 
-import java.util.Locale;
-
 import android.app.Fragment;
 import android.app.FragmentManager;
+import android.content.Intent;
 import android.content.res.Configuration;
 import android.os.Bundle;
 import android.support.v4.app.ActionBarDrawerToggle;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.widget.DrawerLayout;
 import android.support.v7.app.ActionBarActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -18,7 +18,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -29,7 +28,8 @@ public class MainActivity extends ActionBarActivity {
 
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
-    private String[] mPlanetTitles;
+    private String[] mNavTitles;
+    private static int currPage = 0; //manages current page
 	
 	private void openSettings(){
 		Toast.makeText(this, "Click pressed \"Settings\"!", Toast.LENGTH_SHORT).show();
@@ -38,10 +38,11 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Intent intent = getIntent();
         setContentView(R.layout.activity_main);
 
         mTitle = mDrawerTitle = getTitle();
-        mPlanetTitles = getResources().getStringArray(R.array.planets_array);
+        mNavTitles = getResources().getStringArray(R.array.nav_array);
         mDrawerLayout = (DrawerLayout) findViewById(R.id.drawer_layout);
         mDrawerList = (ListView) findViewById(R.id.left_drawer);
 
@@ -49,7 +50,7 @@ public class MainActivity extends ActionBarActivity {
         mDrawerLayout.setDrawerShadow(R.drawable.drawer_shadow, GravityCompat.START);
         // set up the drawer's list view with items and click listener
         mDrawerList.setAdapter(new ArrayAdapter<String>(this,
-                R.layout.drawer_list_item, mPlanetTitles));
+                R.layout.drawer_list_item, mNavTitles));
         mDrawerList.setOnItemClickListener(new DrawerItemClickListener());
 
         // enable ActionBar app icon to behave as action to toggle nav drawer
@@ -124,10 +125,10 @@ public class MainActivity extends ActionBarActivity {
     
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
-        // Create a new fragment and specify the planet to show based on position
-        Fragment fragment = new PlanetFragment();
+        // Create a new fragment and specify the page to show based on position
+        Fragment fragment = new ContentFragment();
         Bundle args = new Bundle();
-        args.putInt(PlanetFragment.ARG_PLANET_NUMBER, position);
+        args.putInt(ContentFragment.ARG_POSITION, position);
         fragment.setArguments(args);
 
         // Insert the fragment by replacing any existing fragment
@@ -138,7 +139,7 @@ public class MainActivity extends ActionBarActivity {
 
         // Highlight the selected item, update the title, and close the drawer
         mDrawerList.setItemChecked(position, true);
-        setTitle(mPlanetTitles[position]);
+        setTitle(mNavTitles[position]);
         mDrawerLayout.closeDrawer(mDrawerList);
     }
     
@@ -167,27 +168,42 @@ public class MainActivity extends ActionBarActivity {
         mDrawerToggle.onConfigurationChanged(newConfig);
     }
     
+    /* Disable back button */
+    @Override
+    public void onBackPressed() {}
+    
+    public void sendMsg(View view) {
+    	if(currPage == 0){
+    		Toast.makeText(this, "hiii", Toast.LENGTH_SHORT).show();
+    	}else{
+    		Toast.makeText(this, "byeee", Toast.LENGTH_SHORT).show();
+    	}
+    }
+    
     /**
-     * Fragment that appears in the "content_frame", shows a planet
+     * Fragment that appears in the "content_frame", shows a page
      */
-    public static class PlanetFragment extends Fragment {
-        public static final String ARG_PLANET_NUMBER = "planet_number";
+    public static class ContentFragment extends Fragment {
+        public static final String ARG_POSITION = "nav_number";
 
-        public PlanetFragment() {
-            // Empty constructor required for fragment subclasses
-        }
+        // Empty constructor required for fragment subclasses
+        public ContentFragment() {}
 
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_planet, container, false);
-            int i = getArguments().getInt(ARG_PLANET_NUMBER);
-            String planet = getResources().getStringArray(R.array.planets_array)[i];
+                Bundle savedInstanceState) {            
+        	View rootView = inflater.inflate(R.layout.fragment_content, container, false);
+            int i = getArguments().getInt(ARG_POSITION);
+            currPage = i;
+            String page = getResources().getStringArray(R.array.nav_array)[i];
 
-            int imageId = getResources().getIdentifier(planet.toLowerCase(Locale.getDefault()),
+            /*int imageId = getResources().getIdentifier(page.toLowerCase(Locale.getDefault()),
                             "drawable", getActivity().getPackageName());
-            ((ImageView) rootView.findViewById(R.id.image)).setImageResource(imageId);
-            getActivity().setTitle(planet);
+            ((ImageView) rootView.findViewById(R.id.image)).setImageResource(imageId);*/
+            Log.d("ProjectOwl", Integer.toString(i));
+            Log.d("ProjectOwl", page);
+            Log.d("ProjectOwl", Integer.toString(currPage));
+            getActivity().setTitle(page);
             return rootView;
         }
     }

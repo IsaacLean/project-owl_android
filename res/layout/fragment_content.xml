@@ -6,33 +6,25 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="?android:attr/actionBarSize"
-    android:orientation="vertical"
-    android:gravity="right"
-    tools:context="com.isaaclean.projectowl.LoginActivity$PlaceholderFragment" >
+    tools:context="com.isaaclean.projectowl.MainActivity$PlaceholderFragment" >
 
     <EditText
-        android:id="@+id/field_username"
-        android:layout_width="match_parent"
+        android:id="@+id/edit_msg"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_weight="1"
         android:ems="10"
-        android:hint="Username" >
+        android:inputType="text"
+        android:hint="nooo" >
 
         <requestFocus />
     </EditText>
 
-    <EditText
-        android:id="@+id/field_password"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:inputType="textPassword"
-        android:hint="Password" />
-
     <Button
-        android:id="@+id/btn_login"
+        android:id="@+id/btn_send"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Login"
-        android:onClick="submitLogin" />
+        android:text="test"
+        android:onClick="sendMsg" />
 
 </LinearLayout>
