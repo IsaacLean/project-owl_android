@@ -118,7 +118,7 @@ public class FinanceActivity extends Activity {
 	}
 	
 	private void openSettings(){
-		Toast.makeText(this, "Click pressed \"Settings\"!", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "You pressed \"Settings\"! :)", Toast.LENGTH_SHORT).show();
 	}
 	
 	private class ItemListTask extends AsyncTask<Void, Void, Void>{		
@@ -136,15 +136,6 @@ public class FinanceActivity extends Activity {
 		protected Void doInBackground(Void... params){
 			HttpClient client = new DefaultHttpClient();
 			HttpGet getRequest = new HttpGet(feedUrl);
-			/*try {
-				client.execute(new HttpGet("http://otispost.appspot.com/finance/android/submit?q=itsalive"));
-			} catch (ClientProtocolException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			} catch (IOException e1) {
-				// TODO Auto-generated catch block
-				e1.printStackTrace();
-			}*/
 			
 			try{
 				HttpResponse response = client.execute(getRequest);

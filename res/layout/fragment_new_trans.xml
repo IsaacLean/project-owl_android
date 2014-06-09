@@ -7,6 +7,7 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="?android:attr/actionBarSize"
     android:orientation="vertical"
+    android:gravity="right"
     tools:context="com.isaaclean.projectowl.NewTransActivity$PlaceholderFragment" >
 
     <EditText
@@ -15,7 +16,7 @@
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="date"
-        android:hint="Date" >
+        android:hint="Date*" >
 
         <requestFocus />
     </EditText>
@@ -49,11 +50,18 @@
         android:hint="Transaction Type" />
 
     <EditText
-        android:id="@+id/Amount"
+        android:id="@+id/field_amount"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:ems="10"
         android:inputType="numberDecimal"
-        android:hint="Amount" />
+        android:hint="Amount*" />
+
+    <Button
+        android:id="@+id/btn_newTrans"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Submit"
+        android:onClick="newTrans" />
 
 </LinearLayout>

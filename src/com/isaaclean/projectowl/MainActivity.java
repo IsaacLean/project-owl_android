@@ -32,7 +32,7 @@ public class MainActivity extends ActionBarActivity {
     private static int currPage = 0; //keeps track of current page for navigation
 	
 	private void openSettings(){
-		Toast.makeText(this, "Click pressed \"Settings\"!", Toast.LENGTH_SHORT).show();
+		Toast.makeText(this, "You pressed \"Settings\"! :)", Toast.LENGTH_SHORT).show();
 	}
 	
     @Override
