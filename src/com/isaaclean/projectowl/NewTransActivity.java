@@ -29,6 +29,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 public class NewTransActivity extends Activity {
+	String submitUrl = "http://otispost.appspot.com/finance/android/submit";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -72,15 +73,36 @@ public class NewTransActivity extends Activity {
 			}
 			
 			if(isNotFloat == false){
-				Log.d("po","yeah");
+				//All conditions are met and the data will be input into the cloudstore
+				String query = "?date=" + date + "&amount=" + amount;
+				if(!desc.isEmpty())
+					query += "&description=" + desc;
+				if(!bus.isEmpty())
+					query += "&business=" + bus;
+				if(!cat.isEmpty())
+					query += "&category=" + cat;
+				if(!trans.isEmpty())
+					query += "&transType=" + trans;
+				Log.d("po",submitUrl + query);
+				submitUrl += query;
 				SubmitTask loaderTask = new SubmitTask();
 				loaderTask.execute();
+				Builder alert = new AlertDialog.Builder(NewTransActivity.this);
+	            alert.setTitle("Success!");
+	            alert.setMessage("You have filled out a proper transaction and it will be sent to the server!");
+	            alert.setPositiveButton("OK", null);
+	            alert.show();
+			}else{
+				Builder alert = new AlertDialog.Builder(NewTransActivity.this);
+	            alert.setTitle("Invalid Amount");
+	            alert.setMessage("The \"Amount\" must be a number!");
+	            alert.setPositiveButton("OK", null);
+	            alert.show();
 			}
 		}
 	}
 	
 	private class SubmitTask extends AsyncTask<Void, Void, Void>{
-		String submitUrl = "http://otispost.appspot.com/finance/android/submit?q=itsalivezz35";
 		
 		@Override
 		protected Void doInBackground(Void... params){
@@ -110,6 +132,12 @@ public class NewTransActivity extends Activity {
 				e.printStackTrace();
 			}
 			return null;
+		}
+		
+		@Override
+		protected void onPostExecute(Void result){
+			submitUrl = "http://otispost.appspot.com/finance/android/submit"; //clear URL for next input
+			super.onPostExecute(result);
 		}
 	}
 
