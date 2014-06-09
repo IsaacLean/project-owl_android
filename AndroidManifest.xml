@@ -5,7 +5,7 @@
     android:versionName="1.0" >
 
     <uses-sdk
-        android:minSdkVersion="11"
+        android:minSdkVersion="14"
         android:targetSdkVersion="19" />
 
     <application
@@ -18,17 +18,8 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
-        </activity>
-        <activity
-            android:name="com.isaaclean.projectowl.DisplayMsgActivity"
-            android:label="@string/title_activity_display_msg" 
-            android:parentActivityName="com.isaaclean.projectowl.MainActivity" >
-			<meta-data
-			    android:name="android.support.PARENT_ACTIVITY"
-			    android:value="com.isaaclean.projectowl.MainActivity" />
         </activity>
     </application>
 
