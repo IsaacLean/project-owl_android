@@ -28,20 +28,62 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 public class FinanceActivity extends Activity {
+	Context context;
+	String feedUrl = "http://otispost.appspot.com/finance.json";
+	
 	ListView itemList;
 	ArrayList<String> itemArrayList = new ArrayList<String>();
 	ArrayAdapter<String> itemAdapter;
-	Context context;
-	String feedUrl = "http://otispost.appspot.com/finance.json";
+	
+	ListView descList;
+	ArrayList<String> descArrayList = new ArrayList<String>();
+	ArrayAdapter<String> descAdapter;
+	
+	ListView busList;
+	ArrayList<String> busArrayList = new ArrayList<String>();
+	ArrayAdapter<String> busAdapter;
+	
+	ListView catList;
+	ArrayList<String> catArrayList = new ArrayList<String>();
+	ArrayAdapter<String> catAdapter;
+	
+	ListView transList;
+	ArrayList<String> transArrayList = new ArrayList<String>();
+	ArrayAdapter<String> transAdapter;
+	
+	ListView amountList;
+	ArrayList<Float> amountArrayList = new ArrayList<Float>();
+	ArrayAdapter<Float> amountAdapter;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_finance);
 		context = this;
+		
 		itemList = (ListView) findViewById(R.id.itemList);		
 		itemAdapter = new ArrayAdapter<String>(this, R.layout.finance_list_item, itemArrayList);
 		itemList.setAdapter(itemAdapter);
+		
+		descList = (ListView) findViewById(R.id.descList);		
+		descAdapter = new ArrayAdapter<String>(this, R.layout.finance_list_item, descArrayList);
+		descList.setAdapter(descAdapter);
+		
+		busList = (ListView) findViewById(R.id.busList);		
+		busAdapter = new ArrayAdapter<String>(this, R.layout.finance_list_item, busArrayList);
+		busList.setAdapter(busAdapter);
+		
+		catList = (ListView) findViewById(R.id.catList);		
+		catAdapter = new ArrayAdapter<String>(this, R.layout.finance_list_item, catArrayList);
+		catList.setAdapter(catAdapter);
+		
+		transList = (ListView) findViewById(R.id.transList);		
+		transAdapter = new ArrayAdapter<String>(this, R.layout.finance_list_item, transArrayList);
+		transList.setAdapter(transAdapter);
+		
+		amountList = (ListView) findViewById(R.id.amountList);		
+		amountAdapter = new ArrayAdapter<Float>(this, R.layout.finance_list_item, amountArrayList);
+		amountList.setAdapter(amountAdapter);
 		
 		ItemListTask loaderTask = new ItemListTask();
 		loaderTask.execute();
@@ -115,10 +157,23 @@ public class FinanceActivity extends Activity {
 				//Log.i("ProjectOwl", jsonData);
 				JSONObject json = new JSONObject(jsonData);
 				JSONArray items = json.getJSONArray("items");
+				
+				itemArrayList.add("Date");
+				descArrayList.add("Desc.");
+				busArrayList.add("Business");
+				catArrayList.add("Category");
+				transArrayList.add("Trans.");
+				amountArrayList.add(Float.parseFloat("0.0"));
+				
 				for(int i=0; i < items.length(); ++i){
 					JSONObject item = items.getJSONObject(i);
 					itemArrayList.add(item.getString("date"));
-				}		
+					descArrayList.add(item.getString("description"));
+					busArrayList.add(item.getString("business"));
+					catArrayList.add(item.getString("category"));
+					transArrayList.add(item.getString("transType"));
+					amountArrayList.add(Float.parseFloat(item.getString("amount")));
+				}
 			}catch(ClientProtocolException e){
 				e.printStackTrace();
 			}catch(IOException e){
@@ -133,6 +188,11 @@ public class FinanceActivity extends Activity {
 		protected void onPostExecute(Void result){
 			dialog.dismiss();
 			itemAdapter.notifyDataSetChanged();
+			descAdapter.notifyDataSetChanged();
+			busAdapter.notifyDataSetChanged();
+			catAdapter.notifyDataSetChanged();
+			transAdapter.notifyDataSetChanged();
+			amountAdapter.notifyDataSetChanged();
 			super.onPostExecute(result);
 		}
 	}
