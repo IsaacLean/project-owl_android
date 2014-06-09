@@ -1,9 +1,26 @@
 package com.isaaclean.projectowl;
 
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+
+import org.apache.http.HttpResponse;
+import org.apache.http.StatusLine;
+import org.apache.http.client.ClientProtocolException;
+import org.apache.http.client.HttpClient;
+import org.apache.http.client.methods.HttpGet;
+import org.apache.http.impl.client.DefaultHttpClient;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import android.app.Activity;
 import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Fragment;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -56,18 +73,43 @@ public class NewTransActivity extends Activity {
 			
 			if(isNotFloat == false){
 				Log.d("po","yeah");
-				/*HttpClient client = new DefaultHttpClient();
-				String submitUrl = "http://otispost.appspot.com/finance/android/submit?q=nooo";
-				try{
-					client.execute(new HttpGet("http://otispost.appspot.com/finance/android/submit?q=itsalive"));
-				} catch (ClientProtocolException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				} catch (IOException e1) {
-					// TODO Auto-generated catch block
-					e1.printStackTrace();
-				}*/
+				SubmitTask loaderTask = new SubmitTask();
+				loaderTask.execute();
 			}
+		}
+	}
+	
+	private class SubmitTask extends AsyncTask<Void, Void, Void>{
+		String submitUrl = "http://otispost.appspot.com/finance/android/submit?q=itsalivezz35";
+		
+		@Override
+		protected Void doInBackground(Void... params){
+			HttpClient client = new DefaultHttpClient();
+			HttpGet getRequest = new HttpGet(submitUrl);
+			
+			try{
+				HttpResponse response = client.execute(getRequest);
+				StatusLine statusLine = response.getStatusLine();
+				int statusCode = statusLine.getStatusCode();
+				
+				if(statusCode != 200){
+					return null;
+				}
+				
+				InputStream jsonStream = response.getEntity().getContent();
+				BufferedReader reader = new BufferedReader(new InputStreamReader(jsonStream));
+				StringBuilder builder = new StringBuilder();
+				String line;
+				
+				while((line = reader.readLine()) != null){
+					builder.append(line);
+				}
+			}catch(ClientProtocolException e){
+				e.printStackTrace();
+			}catch(IOException e){
+				e.printStackTrace();
+			}
+			return null;
 		}
 	}
 
