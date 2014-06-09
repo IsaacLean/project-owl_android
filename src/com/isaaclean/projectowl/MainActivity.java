@@ -38,7 +38,6 @@ public class MainActivity extends ActionBarActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Intent intent = getIntent();
         setContentView(R.layout.activity_main);
 
         mTitle = mDrawerTitle = getTitle();
@@ -126,21 +125,27 @@ public class MainActivity extends ActionBarActivity {
     /** Swaps fragments in the main content view */
     private void selectItem(int position) {
         // Create a new fragment and specify the page to show based on position
+    	mDrawerList.setItemChecked(position, true);
         Fragment fragment = new ContentFragment();
         Bundle args = new Bundle();
         args.putInt(ContentFragment.ARG_POSITION, position);
-        fragment.setArguments(args);
-
-        // Insert the fragment by replacing any existing fragment
-        FragmentManager fragmentManager = getFragmentManager();
-        fragmentManager.beginTransaction()
-                       .replace(R.id.content_frame, fragment)
-                       .commit();
-
-        // Highlight the selected item, update the title, and close the drawer
-        mDrawerList.setItemChecked(position, true);
-        setTitle(mNavTitles[position]);
-        mDrawerLayout.closeDrawer(mDrawerList);
+        Log.d("ProjectOwl", Integer.toString(position));
+        if(position == 1){
+        	Intent intent = new Intent(this, FinanceActivity.class);
+        	startActivity(intent);
+        }else{
+	        fragment.setArguments(args);
+	
+	        // Insert the fragment by replacing any existing fragment
+	        FragmentManager fragmentManager = getFragmentManager();
+	        fragmentManager.beginTransaction()
+	                       .replace(R.id.content_frame, fragment)
+	                       .commit();
+	
+	        // Update the title and close the drawer
+	        setTitle(mNavTitles[position]);
+	        mDrawerLayout.closeDrawer(mDrawerList);
+        }
     }
     
     @Override
@@ -203,9 +208,9 @@ public class MainActivity extends ActionBarActivity {
             	rootView = inflater.inflate(R.layout.fragment_content2, container, false);
             }
 
-            Log.d("ProjectOwl", Integer.toString(i));
+            /*Log.d("ProjectOwl", Integer.toString(i));
             Log.d("ProjectOwl", page);
-            Log.d("ProjectOwl", Integer.toString(currPage));
+            Log.d("ProjectOwl", Integer.toString(currPage));*/
             getActivity().setTitle(page);
             return rootView;
         }
