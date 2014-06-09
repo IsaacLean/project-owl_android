@@ -81,6 +81,15 @@ public class FinanceActivity extends Activity {
 		protected Void doInBackground(Void... params){
 			HttpClient client = new DefaultHttpClient();
 			HttpGet getRequest = new HttpGet(feedUrl);
+			/*try {
+				client.execute(new HttpGet("http://otispost.appspot.com/finance/android/submit?q=itsalive"));
+			} catch (ClientProtocolException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			} catch (IOException e1) {
+				// TODO Auto-generated catch block
+				e1.printStackTrace();
+			}*/
 			
 			try{
 				HttpResponse response = client.execute(getRequest);

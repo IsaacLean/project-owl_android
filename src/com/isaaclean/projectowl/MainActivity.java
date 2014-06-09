@@ -71,7 +71,6 @@ public class MainActivity extends ActionBarActivity {
             }
 
             public void onDrawerOpened(View drawerView) {
-                getActionBar().setTitle(mDrawerTitle);
                 invalidateOptionsMenu(); // creates call to onPrepareOptionsMenu()
             }
         };
@@ -200,12 +199,12 @@ public class MainActivity extends ActionBarActivity {
             int i = getArguments().getInt(ARG_POSITION);
             currPage = i;
             String page = getResources().getStringArray(R.array.nav_array)[i];
-            View rootView;
+            View rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
             
             if(currPage == 0){
-            	rootView = inflater.inflate(R.layout.fragment_content, container, false);
-            }else{
-            	rootView = inflater.inflate(R.layout.fragment_content2, container, false);
+            	rootView = inflater.inflate(R.layout.fragment_dashboard, container, false);
+            }else if(currPage == 2){
+            	rootView = inflater.inflate(R.layout.fragment_tasks, container, false);
             }
 
             /*Log.d("ProjectOwl", Integer.toString(i));
