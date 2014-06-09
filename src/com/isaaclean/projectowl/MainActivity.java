@@ -29,7 +29,7 @@ public class MainActivity extends ActionBarActivity {
     private CharSequence mDrawerTitle;
     private CharSequence mTitle;
     private String[] mNavTitles;
-    private static int currPage = 0; //manages current page
+    private static int currPage = 0; //keeps track of current page for navigation
 	
 	private void openSettings(){
 		Toast.makeText(this, "Click pressed \"Settings\"!", Toast.LENGTH_SHORT).show();
@@ -192,14 +192,17 @@ public class MainActivity extends ActionBarActivity {
         @Override
         public View onCreateView(LayoutInflater inflater, ViewGroup container,
                 Bundle savedInstanceState) {            
-        	View rootView = inflater.inflate(R.layout.fragment_content, container, false);
             int i = getArguments().getInt(ARG_POSITION);
             currPage = i;
             String page = getResources().getStringArray(R.array.nav_array)[i];
+            View rootView;
+            
+            if(currPage == 0){
+            	rootView = inflater.inflate(R.layout.fragment_content, container, false);
+            }else{
+            	rootView = inflater.inflate(R.layout.fragment_content2, container, false);
+            }
 
-            /*int imageId = getResources().getIdentifier(page.toLowerCase(Locale.getDefault()),
-                            "drawable", getActivity().getPackageName());
-            ((ImageView) rootView.findViewById(R.id.image)).setImageResource(imageId);*/
             Log.d("ProjectOwl", Integer.toString(i));
             Log.d("ProjectOwl", page);
             Log.d("ProjectOwl", Integer.toString(currPage));
