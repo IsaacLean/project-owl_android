@@ -4,6 +4,7 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
+import java.util.ArrayList;
 
 import org.apache.http.HttpResponse;
 import org.apache.http.StatusLine;
@@ -28,7 +29,7 @@ import android.widget.ListView;
 
 public class FinanceActivity extends Activity {
 	ListView itemList;
-	String[] itemArray = {"Currently no items"};
+	ArrayList<String> itemArrayList = new ArrayList<String>();
 	ArrayAdapter<String> itemAdapter;
 	Context context;
 	String feedUrl = "http://isaaclean.com/news_sources.json";
@@ -38,9 +39,8 @@ public class FinanceActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.fragment_finance);
 		context = this;
-		
 		itemList = (ListView) findViewById(R.id.itemList);		
-		itemAdapter = new ArrayAdapter<String>(this, R.layout.finance_list_item, itemArray);
+		itemAdapter = new ArrayAdapter<String>(this, R.layout.finance_list_item, itemArrayList);
 		itemList.setAdapter(itemAdapter);
 		
 		ItemListTask loaderTask = new ItemListTask();
@@ -108,10 +108,8 @@ public class FinanceActivity extends Activity {
 				JSONArray sites = json.getJSONArray("sites");
 				for(int i=0; i < sites.length(); ++i){
 					JSONObject item = sites.getJSONObject(i);
-					Log.d("ProjectOwl", item.toString());
-					String title = item.getString("title");
-					Log.d("ProjectOwl", title);
-				}
+					itemArrayList.add(item.getString("title"));
+				}		
 			}catch(ClientProtocolException e){
 				e.printStackTrace();
 			}catch(IOException e){
@@ -125,6 +123,7 @@ public class FinanceActivity extends Activity {
 		@Override
 		protected void onPostExecute(Void result){
 			dialog.dismiss();
+			itemAdapter.notifyDataSetChanged();
 			super.onPostExecute(result);
 		}
 	}
