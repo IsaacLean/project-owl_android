@@ -19,9 +19,9 @@ import org.json.JSONObject;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Context;
+import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -113,7 +113,8 @@ public class FinanceActivity extends Activity {
 	}
 	    
 	private void openNewTrans(){
-		Toast.makeText(this, "Click pressed \"New Transaction\"!", Toast.LENGTH_SHORT).show();
+	    Intent intent = new Intent(this, NewTransActivity.class);
+	    startActivity(intent);
 	}
 	
 	private void openSettings(){

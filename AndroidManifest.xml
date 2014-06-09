@@ -7,7 +7,8 @@
     <uses-sdk
         android:minSdkVersion="14"
         android:targetSdkVersion="19" />
-    <uses-permission android:name="android.permission.INTERNET"/>
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -32,8 +33,16 @@
             android:label="@string/title_activity_finance"
             android:parentActivityName="com.isaaclean.projectowl.MainActivity" >
             <meta-data
-            android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.isaaclean.projectowl.MainActivity" />
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.isaaclean.projectowl.MainActivity" />
+        </activity>
+        <activity
+            android:name="com.isaaclean.projectowl.NewTransActivity"
+            android:label="@string/title_activity_new_trans"
+            android:parentActivityName="com.isaaclean.projectowl.FinanceActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value="com.isaaclean.projectowl.FinanceActivity" />
         </activity>
     </application>
 

@@ -16,5 +16,7 @@
     <string name="title_activity_login">Login to Project Owl</string>
     <string name="title_activity_finance">Finance</string>
     <string name="newTrans">New Transaction</string>
+    <string name="title_activity_new_trans">New Transaction</string>
+    <string name="hello_world">Hello world!</string>
 
 </resources>
