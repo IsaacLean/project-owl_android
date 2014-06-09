@@ -15,5 +15,6 @@
     <string name="title_activity_display_msg">My Message</string>
     <string name="title_activity_login">Login to Project Owl</string>
     <string name="title_activity_finance">Finance</string>
+    <string name="newTrans">New Transaction</string>
 
 </resources>

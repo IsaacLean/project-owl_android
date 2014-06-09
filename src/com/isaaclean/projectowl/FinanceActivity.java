@@ -26,6 +26,7 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
+import android.widget.Toast;
 
 public class FinanceActivity extends Activity {
 	Context context;
@@ -98,14 +99,25 @@ public class FinanceActivity extends Activity {
 
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
-		// Handle action bar item clicks here. The action bar will
-		// automatically handle clicks on the Home/Up button, so long
-		// as you specify a parent activity in AndroidManifest.xml.
-		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
-		return super.onOptionsItemSelected(item);
+	    // Handle presses on the action bar items
+	    switch (item.getItemId()) {
+	        case R.id.action_new_trans:
+	            openNewTrans();
+	            return true;
+	        case R.id.action_settings:
+	            openSettings();
+	            return true;
+	        default:
+	            return super.onOptionsItemSelected(item);
+	    }
+	}
+	    
+	private void openNewTrans(){
+		Toast.makeText(this, "Click pressed \"New Transaction\"!", Toast.LENGTH_SHORT).show();
+	}
+	
+	private void openSettings(){
+		Toast.makeText(this, "Click pressed \"Settings\"!", Toast.LENGTH_SHORT).show();
 	}
 	
 	private class ItemListTask extends AsyncTask<Void, Void, Void>{		
