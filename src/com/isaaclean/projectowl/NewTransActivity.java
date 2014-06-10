@@ -11,15 +11,12 @@ import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.HttpClient;
 import org.apache.http.client.methods.HttpGet;
 import org.apache.http.impl.client.DefaultHttpClient;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 
 import android.app.Activity;
 import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.app.AlertDialog.Builder;
 import android.app.Fragment;
+import android.content.DialogInterface;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.util.Log;
@@ -90,7 +87,11 @@ public class NewTransActivity extends Activity {
 				Builder alert = new AlertDialog.Builder(NewTransActivity.this);
 	            alert.setTitle("Success!");
 	            alert.setMessage("You have filled out a proper transaction and it will be sent to the server!");
-	            alert.setPositiveButton("OK", null);
+	            alert.setPositiveButton("OK", new DialogInterface.OnClickListener(){
+	            	public void onClick(DialogInterface dialog, int d){
+	            		finish();
+	            	}
+	            });
 	            alert.show();
 			}else{
 				Builder alert = new AlertDialog.Builder(NewTransActivity.this);
