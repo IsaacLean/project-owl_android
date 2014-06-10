@@ -85,10 +85,10 @@ public class LoginActivity extends Activity {
 		            alert.setMessage("Your login credentials were incorrect!");
 		            alert.setPositiveButton("OK", null);
 		            alert.show();*/
-					Log.d("po","This happened :(");
+					//Log.d("po","This happened :(");
 					return null;
 				}else{
-					Log.d("po", "YEAH!");
+					//Log.d("po", "YEAH!");
 					Intent intent = new Intent(context, MainActivity.class);
 				    startActivity(intent);
 				}
