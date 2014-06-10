@@ -29,7 +29,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 public class NewTransActivity extends Activity {
-	String submitUrl = "http://otispost.appspot.com/finance/android/submit";
+	String submitUrl = "http://cs121owl.appspot.com/finance/android/submit";
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -102,8 +102,7 @@ public class NewTransActivity extends Activity {
 		}
 	}
 	
-	private class SubmitTask extends AsyncTask<Void, Void, Void>{
-		
+	private class SubmitTask extends AsyncTask<Void, Void, Void>{		
 		@Override
 		protected Void doInBackground(Void... params){
 			HttpClient client = new DefaultHttpClient();
@@ -136,7 +135,7 @@ public class NewTransActivity extends Activity {
 		
 		@Override
 		protected void onPostExecute(Void result){
-			submitUrl = "http://otispost.appspot.com/finance/android/submit"; //clear URL for next input
+			submitUrl = "http://cs121owl.appspot.com/finance/android/submit"; //clear URL for next input
 			super.onPostExecute(result);
 		}
 	}

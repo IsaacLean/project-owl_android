@@ -22,6 +22,7 @@ import android.content.Context;
 import android.content.Intent;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.ArrayAdapter;
@@ -30,7 +31,7 @@ import android.widget.Toast;
 
 public class FinanceActivity extends Activity {
 	Context context;
-	String feedUrl = "http://otispost.appspot.com/finance.json";
+	String feedUrl = "http://cs121owl.appspot.com/finance.json";
 	
 	ListView itemList;
 	ArrayList<String> itemArrayList = new ArrayList<String>();
@@ -158,7 +159,7 @@ public class FinanceActivity extends Activity {
 				String jsonData = builder.toString();
 				
 				//Start reading JSON
-				//Log.i("ProjectOwl", jsonData);
+				Log.i("ProjectOwl", jsonData);
 				JSONObject json = new JSONObject(jsonData);
 				JSONArray items = json.getJSONArray("items");
 				
